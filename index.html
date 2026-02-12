@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kiss Day – Miles Between Us 💋</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Poppins',sans-serif;
+  background:linear-gradient(160deg,#2b1055,#7597de);
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow-y:auto;
+  color:#fff;
+  padding:20px 0;
+}
+
+.card{
+  width:94%;
+  max-width:520px;
+  max-height:90vh;
+  overflow-y:auto;
+  background:rgba(255,255,255,0.1);
+  backdrop-filter:blur(20px);
+  border-radius:30px;
+  padding:30px 22px 40px;
+  text-align:center;
+  box-shadow:0 25px 60px rgba(0,0,0,.4);
+  position:relative;
+}
+
+h1{
+  font-family:'Pacifico',cursive;
+  font-size:2.2rem;
+  color:#ffd1f2;
+  margin-bottom:6px;
+}
+
+.subtitle{
+  font-size:.9rem;
+  opacity:.85;
+  margin-bottom:18px;
+}
+
+.story{
+  min-height:160px;
+  font-size:.95rem;
+  line-height:1.6;
+  text-align:left;
+  white-space:pre-line;
+}
+
+.gifContainer{
+  margin-top:15px;
+}
+
+.gifContainer img{
+  width:100%;
+  max-width:260px;
+  border-radius:20px;
+  margin-top:10px;
+  box-shadow:0 10px 30px rgba(0,0,0,.3);
+}
+
+.stickers{
+  margin-top:12px;
+  font-size:1.8rem;
+}
+
+button{
+  margin-top:18px;
+  padding:12px 26px;
+  border:none;
+  border-radius:30px;
+  background:linear-gradient(135deg,#ff7eb3,#ff758c);
+  color:#fff;
+  font-weight:600;
+  cursor:pointer;
+  box-shadow:0 8px 25px rgba(255,118,140,.4);
+}
+
+.kissBtn{
+  font-size:3.5rem;
+  margin-top:18px;
+  cursor:pointer;
+  transition:transform .15s ease;
+}
+
+.kissBtn:active{transform:scale(1.3)}
+
+.counter{
+  margin-top:10px;
+  font-weight:600;
+  color:#ffd1f2;
+}
+
+.meter{
+  height:10px;
+  background:rgba(255,255,255,.2);
+  border-radius:20px;
+  margin-top:10px;
+  overflow:hidden;
+}
+
+.meterFill{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#ff7eb3,#ffffff);
+  transition:width .3s ease;
+}
+
+.float{
+  position:absolute;
+  font-size:1.8rem;
+  animation:floatUp 4s linear infinite;
+  pointer-events:none;
+}
+
+@keyframes floatUp{
+  from{transform:translateY(110vh);opacity:1}
+  to{transform:translateY(-20vh);opacity:0}
+}
+
+#finalPopup{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.75);
+  align-items:center;
+  justify-content:center;
+}
+
+.popupBox{
+  background:#fff;
+  color:#222;
+  padding:30px;
+  border-radius:25px;
+  width:85%;
+  max-width:340px;
+  text-align:center;
+}
+
+@media(max-width:480px){
+  h1{font-size:1.8rem}
+  .story{font-size:.9rem}
+  .kissBtn{font-size:3rem}
+}
+</style>
+</head>
+<body>
+
+<div class="card">
+  <h1>Happy Kiss Day Jaaanuuu 💋</h1>
+  <div class="subtitle">Miles Apart. Hearts Close.</div>
+
+  <div class="story" id="story"></div>
+
+  <div class="gifContainer" id="gifContainer" style="display:none;">
+    <!-- Romantic Couple Kissing GIFs -->
+    
+    <!-- Empty Slots For Your Local GIFs -->
+    <img src="./love smile GIF.gif" alt="Add Your Kiss GIF Here">
+    <img src="./black and white love GIF.gif" alt="Add Your Kiss GIF Here">
+    <img src="./passion GIF.gif" alt="Add Your Kiss GIF Here">
+    <img src="./Passion Love GIF.gif" alt="Add Your Kiss GIF Here">
+    <img src="./Passion Seduction GIF.gif" alt="Add Your Kiss GIF Here">
+    <img src="./passionate GIF.gif" alt="Add Your Kiss GIF Here">
+
+    <div class="stickers">💋💞❤️💏✨</div>
+  </div>
+
+  <button id="startBtn">Start The Moment 💞</button>
+
+  <div id="kissArea" style="display:none">
+    <div class="kissBtn" id="kissBtn">💋</div>
+    <div class="counter" id="counter">Kisses Sent: 0 / 15</div>
+    <div class="meter"><div class="meterFill" id="meterFill"></div></div>
+  </div>
+</div>
+
+<div id="finalPopup">
+  <div class="popupBox" id="captureArea">
+    <h2 style="font-family:'Pacifico',cursive;color:#ff4d88">Happy Kiss Day 🤍</h2>
+    <p style="margin-top:10px;font-size:.95rem">
+      If I were there right now,
+      I’d pull you closer,
+      kiss you softly,
+      and forget the world for a moment.
+      
+      Until that day comes,
+      every 💋 here carries my love to you.
+      
+      Always yours.
+      VN ME KISSI CHAHIYE MEKO BHUT SAARI KAL
+      aur hn SCREENSHOT lena na bhule babuuu, muaaaaawwwhhhh
+    </p>
+    <button onclick="closePopup()">Send More 💋</button>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+
+const storyEl=document.getElementById('story');
+const startBtn=document.getElementById('startBtn');
+const kissArea=document.getElementById('kissArea');
+const kissBtn=document.getElementById('kissBtn');
+const counter=document.getElementById('counter');
+const meterFill=document.getElementById('meterFill');
+const finalPopup=document.getElementById('finalPopup');
+const gifContainer=document.getElementById('gifContainer');
+
+let kisses=0;
+const maxKisses=15;
+
+const storyText=`Close your eyes and imagine this...
+
+I step closer.
+My fingers gently tilt your chin up.
+Our eyes lock.
+You smile softly.
+
+I lean in slowly.
+Our lips meet.
+Warm. Gentle. Real.
+
+A kiss that says everything
+we've been holding back.
+
+And even if miles separate us,
+my heart still finds yours. 💋
+SCROLL DOWN BABY TO SEE SOMETHING`;
+
+let i=0;
+
+startBtn.addEventListener('click',()=>{
+  startBtn.disabled=true;
+  typeWriter();
+});
+
+function typeWriter(){
+  if(i<storyText.length){
+    storyEl.textContent+=storyText.charAt(i);
+    i++;
+    setTimeout(typeWriter,25);
+  }else{
+    kissArea.style.display='block';
+    gifContainer.style.display='block';
+  }
+}
+
+kissBtn.addEventListener('click',()=>{
+  kisses++;
+  counter.textContent=`Kisses Sent: ${kisses} / ${maxKisses}`;
+  meterFill.style.width=(kisses/maxKisses)*100+'%';
+  createFloat();
+  if(kisses>=maxKisses){
+    finalPopup.style.display='flex';
+  }
+});
+
+window.closePopup=function(){
+  finalPopup.style.display='none';
+}
+
+function createFloat(){
+  const f=document.createElement('div');
+  f.className='float';
+  f.textContent='💋';
+  f.style.left=Math.random()*100+'vw';
+  document.body.appendChild(f);
+  setTimeout(()=>f.remove(),4000);
+}
+
+});
+</script>
+
+</body>
+</html>
